@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pdf-margin-tool/static/css/main.57266d41.css",
+    "main.js": "/pdf-margin-tool/static/js/main.6d975ba9.js",
+    "static/js/453.2dae8bb6.chunk.js": "/pdf-margin-tool/static/js/453.2dae8bb6.chunk.js",
+    "index.html": "/pdf-margin-tool/index.html",
+    "main.57266d41.css.map": "/pdf-margin-tool/static/css/main.57266d41.css.map",
+    "main.6d975ba9.js.map": "/pdf-margin-tool/static/js/main.6d975ba9.js.map",
+    "453.2dae8bb6.chunk.js.map": "/pdf-margin-tool/static/js/453.2dae8bb6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.57266d41.css",
+    "static/js/main.6d975ba9.js"
+  ]
+}
