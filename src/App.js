@@ -83,7 +83,7 @@ function App() {
       // Get first page dimensions
       const pages = pdfDoc.getPages();
       const firstPage = pages[0];
-      const { width: originalWidth, height: originalHeight } = firstPage.getSize();
+      const { width: originalWidth } = firstPage.getSize();
 
       // Calculate margin
       const marginPixels = calculateMargin(originalWidth);
