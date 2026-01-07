@@ -1,7 +1,7 @@
 {
   "name": "pdf-margin-tool",
   "version": "1.0.0",
-  "homepage": "https://YOUR-GITHUB-USERNAME.github.io/pdf-margin-tool",
+  "homepage": "https://bh-relevate.github.io/pdf-margin-tool",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
