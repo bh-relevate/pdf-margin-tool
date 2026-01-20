@@ -1,0 +1,142 @@
+Please align our design system to the following...
+
+# ELE Cosmic Design System
+**Version:** 2.0  
+**Theme:** "Deep Space Data"  
+**Core Philosophy:** High-contrast, futuristic data visualization using deep void backgrounds, vibrant neon accents, and sophisticated glassmorphism.
+
+---
+
+## 1. Color Palette
+
+The color system relies on a "Void" background strategy where content floats on glass layers.
+
+### Brand Colors
+| Token Name | Hex Code | Usage |
+| :--- | :--- | :--- |
+| `rh-lime` | `#CDDE00` | **Primary Action**, Key Data, Active States, Glows |
+| `rh-orange` | `#BC4700` | Secondary Data, Warnings, Gradients |
+| `rh-teal` | `#14B8A6` | Tertiary Data, Info, KOLs |
+| `rh-red` | `#9F1239` | Alerts, Negative Trends, Suppression |
+| `rh-deep` | `#020408` | The "Void" (Absolute Background) |
+
+### Surface Hierarchy (Material Design 3 Adaptation)
+| Token Name | Hex Code | Usage |
+| :--- | :--- | :--- |
+| `surface-dim` | `#020617` | Deepest layer, behind cards |
+| `surface` | `#0B1221` | Base surface |
+| `surface-container` | `#111D33` | Standard Card Background |
+| `surface-container-high` | `#1E293B` | Inputs, Hover States |
+| `surface-outline` | `#1E293B` | Borders, Dividers |
+
+### Text Colors
+| Token Name | Tailwind Class | Usage |
+| :--- | :--- | :--- |
+| `on-surface` | `text-white` | Headings, Primary Data, Active Text |
+| `on-surface-variant` | `text-slate-400` | Subtitles, Labels, Descriptions |
+
+---
+
+## 2. Typography
+
+**Font Family:** `Montserrat` (Google Fonts)
+
+| Role | Weight | Size (Desktop) | Letter Spacing | Usage |
+| :--- | :--- | :--- | :--- | :--- |
+| **Display** | Thin (100-200) | 48px - 72px | `-0.02em` | Hero numbers, Presentation titles |
+| **Heading 1** | Light (300) | 30px | `normal` | Page Titles, "Welcome" text |
+| **Heading 2** | Regular (400) | 24px | `normal` | Section Headers |
+| **Heading 3** | Medium (500) | 18px | `wide` | Card Titles, KPI Labels |
+| **Body** | Regular (400) | 14px | `normal` | Paragraphs |
+| **Label** | Bold (700) | 10px-12px | `widest` | Uppercase Labels, Axis text |
+
+---
+
+## 3. Glassmorphism & Effects
+
+The system uses three distinct glass styles to create depth without clutter.
+
+### A. Standard Glass (`.glass`)
+Used for: Main headers, standard cards, control bars.
+```css
+background: rgba(17, 29, 51, 0.4);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-top: 1px solid rgba(255, 255, 255, 0.15); /* Top highlight for 3D effect */
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+B. Active Glass (.glass-lime)
+Used for: Featured cards, active states, call-to-action areas.
+code
+CSS
+background: linear-gradient(135deg, rgba(205, 222, 0, 0.1) 0%, rgba(17, 29, 51, 0.1) 100%);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(205, 222, 0, 0.3);
+box-shadow: 0 0 40px rgba(205, 222, 0, 0.1); /* Glow effect */
+C. The "Cosmic" Background System
+The application background is not a single color. It is a composed stack:
+Layer 1: Radial Gradient (Deep Navy Center #0f172a → Void Black Edge #020408).
+Layer 2: Animated colored "blobs" (Lime, Blue, Purple) moving slowly behind the UI.
+Layer 3: Noise Texture SVG (opacity: 0.03) to prevent banding and add grit.
+Layer 4: Vignette Overlay (radial-gradient(transparent 40%, #020408 100%)) to focus the center.
+4. UI Components
+Buttons
+Primary: bg-rh-lime text-rh-primary font-bold shadow-lg shadow-rh-lime/20
+Ghost/Nav: Pill-shaped, transparent background. Active state uses bg-rh-lime text-rh-primary.
+Glass: Used for quick actions. hover:translate-x animations on icons.
+Gradient Bars (Data Viz)
+Do not use flat colors for progress bars. Use the Neon Flow style.
+Structure: Pill-shaped container.
+Gradient: Starts Pure White (#ffffff) and transitions to the Target Color (e.g., #CDDE00).
+Glow: The bar must cast a colored shadow matching the target color (e.g., shadow-[0_0_14px_rgba(205,222,0,0.6)]).
+Cards
+Border Radius: rounded-2xl (16px) or rounded-3xl (24px) for large panels.
+Interaction: hover:-translate-y-1 transition for clickable cards.
+5. Tailwind Configuration Snippet
+Copy this into your tailwind.config.js to instantly adopt the design tokens.
+code
+JavaScript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'rh-primary': '#050B14',
+        'rh-deep': '#020408',
+        'rh-lime': '#CDDE00',
+        'rh-orange': '#BC4700',
+        'rh-teal': '#14B8A6',
+        'rh-red': '#9F1239',
+        // MD3 Surface Mappings
+        'md-surface-dim': '#020617',
+        'md-surface-container': '#111D33',
+        'md-surface-container-high': '#1E293B',
+        'md-on-surface': '#F8FAFC',
+        'md-on-surface-variant': '#94A3B8',
+        'md-outline': '#1E293B',
+      },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
+      },
+      animation: {
+        'blob': 'blob 10s infinite',
+        'fade-in': 'fadeIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+      },
+      keyframes: {
+        blob: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      }
+    }
+  }
+}
+6. Implementation Checklist
+Install Font: Ensure Montserrat is loaded (weights 100-700).
+Set Background: Apply the 4-layer background system to the root div.
+Apply Glass: Use the CSS classes for all containers; avoid solid backgrounds.
+Data Viz: Ensure all charts use the palette: ['#CDDE00', '#64B5F6', '#BC4700', '#7C8034', '#9F2241', '#4DB6AC'].
