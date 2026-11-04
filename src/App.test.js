@@ -22,6 +22,7 @@ describe('welcome guide', () => {
     const dialog = screen.getByRole('dialog', { name: 'Quick guide' });
     expect(within(dialog).getByText('Privacy:').closest('.banner')).toHaveTextContent('Files are never uploaded to any server.');
     expect(dialog).not.toHaveTextContent(/readme/i);
+    expect(dialog).toHaveTextContent('Custom pixels at 375px recommended');
   });
 
   test('stays hidden on the next visit once dismissed', () => {
@@ -68,13 +69,14 @@ describe('after the guide', () => {
 
   test('defaults to custom pixels at 375px', () => {
     render(<App />);
-    expect(screen.getByLabelText('Custom pixels')).toBeChecked();
+    expect(screen.getByLabelText('Custom pixels (375px recommended)')).toBeChecked();
+    expect(screen.getByLabelText('TPP/SPP Default (30%)')).not.toBeChecked();
     expect(screen.getByLabelText('Margin width')).toHaveValue(375);
   });
 
   test('shows the version and an orange banner for feedback', () => {
     render(<App />);
-    expect(screen.getByText(/PDF Margin Tool v2\.0/)).toBeInTheDocument();
+    expect(screen.getByText(/PDF Margin Tool v2\.1/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Feedback' }));
     expect(screen.getByText(/send feedback/).closest('.banner')).toHaveClass('banner-warning');
   });

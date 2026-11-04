@@ -27,11 +27,10 @@ Select one of three options:
   A) TPP/SPP Default (30%)
      - Automatically adds 30% margin to right side
      - Follows standard submission guidelines
-     - Use this for most projects
 
-  B) Custom Pixels - RECOMMENDED
-     - Enter specific pixel width (example: 375)
-     - Use when you have exact requirements
+  B) Custom Pixels - RECOMMENDED (selected by default at 375px)
+     - Enter specific pixel width (375 recommended)
+     - Change the value when you have exact requirements
      - Common values: 300-500
 
   C) Custom Percentage
@@ -112,7 +111,7 @@ A: No undo feature, but you always have your original file. Just reprocess
 
 ✓ Always keep your original files - tool creates a new file
 
-✓ Use TPP/SPP Default for standard projects (most common)
+✓ Custom Pixels at 375px is the recommended default
 
 ✓ Tool auto-names file with "_annotated" suffix for easy identification
 
@@ -191,6 +190,6 @@ to streamline workflows and improve efficiency.
 Questions? Contact your team lead or AI COE representative.
 
 Last Updated: November 2026
-Version: 2.0
+Version: 2.1
 
 ================================================================================

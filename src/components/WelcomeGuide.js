@@ -31,7 +31,7 @@ function WelcomeGuide({ open, onClose }) {
     >
       <ol className="guide-steps">
         <li>Upload or drag-drop your PDF screenshot file</li>
-        <li>Select margin setting (TPP/SPP Default recommended)</li>
+        <li>Select margin setting (Custom pixels at 375px recommended)</li>
         <li>Click "Process PDF" to add annotation space</li>
         <li>Download will start automatically when complete</li>
       </ol>

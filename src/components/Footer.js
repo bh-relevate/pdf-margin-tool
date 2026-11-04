@@ -9,7 +9,7 @@ function Footer({ onHelp }) {
       {showFeedback && (
         <Banner status="warning">Please send feedback to your team lead or AI COE representative.</Banner>
       )}
-      <p>PDF Margin Tool v2.0 | Relevate Health AI Center of Excellence</p>
+      <p>PDF Margin Tool v2.1 | Relevate Health AI Center of Excellence</p>
       <p className="footer-links">
         <button type="button" className="link-button" onClick={onHelp}>Help</button>
         <span aria-hidden="true">•</span>

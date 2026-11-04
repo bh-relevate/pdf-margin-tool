@@ -2,8 +2,8 @@ import React from 'react';
 import Icon from './Icon';
 
 const OPTIONS = [
-  { value: 'tpp-default', label: 'TPP/SPP Default (30%), recommended for standard submissions' },
-  { value: 'custom-pixels', label: 'Custom pixels' },
+  { value: 'tpp-default', label: 'TPP/SPP Default (30%)' },
+  { value: 'custom-pixels', label: 'Custom pixels (375px recommended)' },
   { value: 'custom-percentage', label: 'Custom percentage' },
 ];
 

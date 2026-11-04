@@ -53,15 +53,14 @@ The PDF Margin Tool automates the process of adding right-side white space to PD
 
 #### Step 2: Choose Margin Settings
 
-**TPP/SPP Default (30%)** - *Recommended*
+**Custom Pixels** - *Recommended, selected by default at 375px*
+- Enter a specific pixel width (`375` recommended)
+- Change the value when you have exact dimension requirements
+- Common values: 300-500px
+
+**TPP/SPP Default (30%)**
 - Automatically adds 30% margin to the right side
 - Follows standard TPP/SPP submission guidelines (70/30 layout)
-- Best for standard regulatory submissions
-
-**Custom Pixels**
-- Enter a specific pixel width (e.g., `375`)
-- Use when you have exact dimension requirements
-- Common values: 300-500px
 
 **Custom Percentage**
 - Enter a percentage of the page width (e.g., `25`)
@@ -338,7 +337,10 @@ If you'd like to add optional anonymous usage analytics for improvement purposes
 
 ## Version History
 
-### v2.0.0 (Current)
+### v2.1.0 (Current)
+- Margin settings default to Custom Pixels at 375px, now the recommended option
+
+### v2.0.0
 - Restyled to the latest ELE Cosmic Design System (Deep Space mode)
 - First-visit Quick Guide dialog, reopened from the footer's Help link
 - Inline error messages replace browser alert popups
