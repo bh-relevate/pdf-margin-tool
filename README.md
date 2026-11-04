@@ -242,15 +242,21 @@ pdf-margin-tool/
 ├── src/
 │   ├── components/
 │   │   ├── Header.js       # App header component
+│   │   ├── Masthead.js     # Page title and description
 │   │   ├── FileUpload.js   # File upload & drag-drop
 │   │   ├── MarginSettings.js   # Margin configuration
 │   │   ├── ProcessButton.js    # Process action button
 │   │   ├── ProgressBar.js      # Processing progress
-│   │   ├── InfoSection.js      # Help information
+│   │   ├── PrivacyNotice.js    # Privacy message
+│   │   ├── Banner.js           # Inline status messages
+│   │   ├── Dialog.js           # Shared dialog shell and focus handling
+│   │   ├── WelcomeGuide.js     # First-visit guide, reopened from Help
 │   │   ├── SuccessModal.js     # Success dialog
+│   │   ├── Icon.js             # Material icons
 │   │   └── Footer.js           # App footer
 │   ├── App.js              # Main application logic
 │   ├── App.css             # Global styles
+│   ├── tokens.css          # Cosmic Design System tokens (Deep Space)
 │   └── index.js            # React entry point
 ├── package.json            # Dependencies and scripts
 ├── README.md               # This file
@@ -332,7 +338,13 @@ If you'd like to add optional anonymous usage analytics for improvement purposes
 
 ## Version History
 
-### v1.0.0 (Current)
+### v2.0.0 (Current)
+- Restyled to the latest ELE Cosmic Design System (Deep Space mode)
+- First-visit Quick Guide dialog, reopened from the footer's Help link
+- Inline error messages replace browser alert popups
+- Improved keyboard access for the upload area, margin options and dialogs
+
+### v1.0.0
 - Initial release
 - Core PDF margin addition functionality
 - TPP/SPP default (30%) margin option

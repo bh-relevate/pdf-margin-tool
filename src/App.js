@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
+import Banner from './components/Banner';
 import Header from './components/Header';
+import Masthead from './components/Masthead';
 import FileUpload from './components/FileUpload';
 import MarginSettings from './components/MarginSettings';
 import ProcessButton from './components/ProcessButton';
 import ProgressBar from './components/ProgressBar';
-import InfoSection from './components/InfoSection';
+import PrivacyNotice from './components/PrivacyNotice';
 import SuccessModal from './components/SuccessModal';
+import WelcomeGuide, { hasSeenGuide, markGuideSeen } from './components/WelcomeGuide';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -21,9 +24,23 @@ function App() {
   const [progressText, setProgressText] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [error, setError] = useState(null);
+  const [marginError, setMarginError] = useState(null);
+  const [showGuide, setShowGuide] = useState(() => !hasSeenGuide());
+
+  const handleCloseGuide = () => {
+    markGuideSeen();
+    setShowGuide(false);
+  };
+
+  const clearErrors = () => {
+    setError(null);
+    setMarginError(null);
+  };
 
   const handleFileSelect = async (file) => {
     try {
+      clearErrors();
       setSelectedFile(file);
       
       // Read and load PDF
@@ -40,8 +57,8 @@ function App() {
         pages: pageCount
       });
     } catch (error) {
-      alert('Error loading PDF: ' + error.message);
       handleRemoveFile();
+      setError('Error loading PDF: ' + error.message);
     }
   };
 
@@ -51,29 +68,51 @@ function App() {
     setFileInfo(null);
     setProgress(0);
     setProgressText('');
+    clearErrors();
+  };
+
+  const handleMarginTypeChange = (type) => {
+    clearErrors();
+    setMarginType(type);
+  };
+
+  const handleCustomValueChange = (value) => {
+    clearErrors();
+    setCustomValue(value);
+  };
+
+  const validateMargin = () => {
+    const value = parseFloat(customValue);
+    if (marginType === 'custom-pixels' && (isNaN(value) || value < 0)) {
+      return 'Please enter a valid pixel value (positive number)';
+    }
+    if (marginType === 'custom-percentage' && (isNaN(value) || value < 0 || value > 100)) {
+      return 'Please enter a valid percentage (0-100)';
+    }
+    return null;
   };
 
   const calculateMargin = (pageWidth) => {
     if (marginType === 'tpp-default') {
       return Math.round(pageWidth * 0.3);
     } else if (marginType === 'custom-pixels') {
-      const value = parseFloat(customValue);
-      if (isNaN(value) || value < 0) {
-        throw new Error('Please enter a valid pixel value (positive number)');
-      }
-      return Math.round(value);
+      return Math.round(parseFloat(customValue));
     } else if (marginType === 'custom-percentage') {
-      const value = parseFloat(customValue);
-      if (isNaN(value) || value < 0 || value > 100) {
-        throw new Error('Please enter a valid percentage (0-100)');
-      }
-      return Math.round(pageWidth * (value / 100));
+      return Math.round(pageWidth * (parseFloat(customValue) / 100));
     }
     return 0;
   };
 
   const processPDF = async () => {
     if (!pdfDoc) return;
+
+    clearErrors();
+    const invalidMargin = validateMargin();
+    if (invalidMargin) {
+      setMarginError(invalidMargin);
+      setError('Check the margin value before processing.');
+      return;
+    }
 
     try {
       setIsProcessing(true);
@@ -153,7 +192,7 @@ function App() {
       setShowModal(true);
 
     } catch (error) {
-      alert('Error processing PDF: ' + error.message);
+      setError('Error processing PDF: ' + error.message);
     } finally {
       setIsProcessing(false);
       setTimeout(() => {
@@ -170,22 +209,28 @@ function App() {
 
   return (
     <div className="app">
-      <div className="container">
-        <Header />
-        
-        <main className="main-content">
+      <Header />
+
+      <main className="main-content">
+        <Masthead />
+
+        <div className="form-stack">
+          {error && <Banner status="error">{error}</Banner>}
+
           <FileUpload
             selectedFile={selectedFile}
             fileInfo={fileInfo}
             onFileSelect={handleFileSelect}
             onRemoveFile={handleRemoveFile}
+            onError={setError}
           />
 
           <MarginSettings
             marginType={marginType}
             customValue={customValue}
-            onMarginTypeChange={setMarginType}
-            onCustomValueChange={setCustomValue}
+            marginError={marginError}
+            onMarginTypeChange={handleMarginTypeChange}
+            onCustomValueChange={handleCustomValueChange}
           />
 
           <ProcessButton
@@ -200,11 +245,13 @@ function App() {
             text={progressText}
           />
 
-          <InfoSection />
-        </main>
+          <PrivacyNotice />
+        </div>
 
-        <Footer />
-      </div>
+        <Footer onHelp={() => setShowGuide(true)} />
+      </main>
+
+      <WelcomeGuide open={showGuide} onClose={handleCloseGuide} />
 
       <SuccessModal
         show={showModal}

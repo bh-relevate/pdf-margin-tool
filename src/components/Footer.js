@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Banner from './Banner';
 
-function Footer() {
-  const handleHelpClick = (e) => {
-    e.preventDefault();
-    alert('For help, please contact your UX team or visit the README documentation.');
-  };
-
-  const handleFeedbackClick = (e) => {
-    e.preventDefault();
-    alert('Please send feedback to your team lead or AI COE representative.');
-  };
+function Footer({ onHelp }) {
+  const [showFeedback, setShowFeedback] = useState(false);
 
   return (
     <footer className="footer">
-      <p>PDF Margin Tool v1.0 | Relevate Health AI Center of Excellence</p>
+      {showFeedback && (
+        <Banner status="warning">Please send feedback to your team lead or AI COE representative.</Banner>
+      )}
+      <p>PDF Margin Tool v2.0 | Relevate Health AI Center of Excellence</p>
       <p className="footer-links">
-        <a href="#help" onClick={handleHelpClick}>Help</a> • 
-        <a href="#feedback" onClick={handleFeedbackClick}>Feedback</a>
+        <button type="button" className="link-button" onClick={onHelp}>Help</button>
+        <span aria-hidden="true">•</span>
+        <button type="button" className="link-button" onClick={() => setShowFeedback(true)}>Feedback</button>
       </p>
     </footer>
   );

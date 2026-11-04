@@ -1,68 +1,83 @@
 import React from 'react';
+import Icon from './Icon';
 
-function MarginSettings({ marginType, customValue, onMarginTypeChange, onCustomValueChange }) {
+const OPTIONS = [
+  { value: 'tpp-default', label: 'TPP/SPP Default (30%), recommended for standard submissions' },
+  { value: 'custom-pixels', label: 'Custom pixels' },
+  { value: 'custom-percentage', label: 'Custom percentage' },
+];
+
+function MarginSettings({ marginType, customValue, marginError, onMarginTypeChange, onCustomValueChange }) {
+  const isPercentage = marginType === 'custom-percentage';
+
+  const step = (delta) => {
+    const current = parseFloat(customValue);
+    let next = (isNaN(current) ? 0 : current) + delta;
+    next = Math.max(0, next);
+    if (isPercentage) next = Math.min(100, next);
+    onCustomValueChange(String(next));
+  };
+
   return (
     <section className="settings-section">
-      <h2>Margin Settings</h2>
-      <div className="radio-group">
-        <label className="radio-label">
-          <input
-            type="radio"
-            name="margin-type"
-            value="tpp-default"
-            checked={marginType === 'tpp-default'}
-            onChange={(e) => onMarginTypeChange(e.target.value)}
-          />
-          <span className="radio-custom"></span>
-          <span className="radio-text">
-            <strong>TPP/SPP Default (30%)</strong>
-            <small>Recommended for standard submissions</small>
-          </span>
-        </label>
+      <fieldset className="radio-group">
+        <legend className="field-label">Margin settings</legend>
+        <div className="radio-list">
+          {OPTIONS.map((option) => {
+            const checked = marginType === option.value;
+            return (
+              <label key={option.value} className={`radio-item ${checked ? 'selected' : ''}`}>
+                <input
+                  className="sr-only"
+                  type="radio"
+                  name="margin-type"
+                  value={option.value}
+                  checked={checked}
+                  onChange={(e) => onMarginTypeChange(e.target.value)}
+                />
+                <Icon
+                  name={checked ? 'radio_button_checked' : 'radio_button_unchecked'}
+                  className="radio-icon"
+                />
+                <span>{option.label}</span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
 
-        <label className="radio-label">
-          <input
-            type="radio"
-            name="margin-type"
-            value="custom-pixels"
-            checked={marginType === 'custom-pixels'}
-            onChange={(e) => onMarginTypeChange(e.target.value)}
-          />
-          <span className="radio-custom"></span>
-          <span className="radio-text">
-            <strong>Custom Pixels</strong>
-            <small>Enter specific pixel width</small>
-          </span>
-        </label>
-
-        <label className="radio-label">
-          <input
-            type="radio"
-            name="margin-type"
-            value="custom-percentage"
-            checked={marginType === 'custom-percentage'}
-            onChange={(e) => onMarginTypeChange(e.target.value)}
-          />
-          <span className="radio-custom"></span>
-          <span className="radio-text">
-            <strong>Custom Percentage</strong>
-            <small>Percentage of page width</small>
-          </span>
-        </label>
-      </div>
-
-      {(marginType === 'custom-pixels' || marginType === 'custom-percentage') && (
-        <div className="custom-input-wrapper">
-          <input
-            type="number"
-            id="custom-value"
-            placeholder="Enter value"
-            min="0"
-            step="1"
-            value={customValue}
-            onChange={(e) => onCustomValueChange(e.target.value)}
-          />
-          <span id="custom-unit">{marginType === 'custom-pixels' ? 'px' : '%'}</span>
+      {(marginType === 'custom-pixels' || isPercentage) && (
+        <div>
+          <label className="field-label" htmlFor="custom-value">
+            {isPercentage ? 'Margin percentage' : 'Margin width'}
+          </label>
+          <div className={`number-input ${marginError ? 'error' : ''}`}>
+            <input
+              type="number"
+              id="custom-value"
+              placeholder="Value"
+              min="0"
+              max={isPercentage ? '100' : undefined}
+              step="1"
+              value={customValue}
+              aria-invalid={Boolean(marginError)}
+              aria-describedby={marginError ? 'custom-value-error' : undefined}
+              onChange={(e) => onCustomValueChange(e.target.value)}
+            />
+            <span className="number-unit">{isPercentage ? '%' : 'px'}</span>
+            {/* Pointer shortcut only: arrow keys already step the focused input */}
+            <span className="number-stepper">
+              <button type="button" className="step-up" tabIndex={-1} aria-label="Increase value" onClick={() => step(1)}>
+                <Icon name="expand_more" size={16} />
+              </button>
+              <button type="button" tabIndex={-1} aria-label="Decrease value" onClick={() => step(-1)}>
+                <Icon name="expand_more" size={16} />
+              </button>
+            </span>
+          </div>
+          {marginError && (
+            <p className="field-error" id="custom-value-error">{marginError}</p>
+          )}
         </div>
       )}
     </section>

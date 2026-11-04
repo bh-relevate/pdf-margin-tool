@@ -190,7 +190,7 @@ to streamline workflows and improve efficiency.
 
 Questions? Contact your team lead or AI COE representative.
 
-Last Updated: January 2024
-Version: 1.0
+Last Updated: November 2026
+Version: 2.0
 
 ================================================================================

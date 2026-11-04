@@ -1,16 +1,23 @@
 import React, { useRef } from 'react';
+import Icon from './Icon';
 
-function FileUpload({ selectedFile, fileInfo, onFileSelect, onRemoveFile }) {
+function FileUpload({ selectedFile, fileInfo, onFileSelect, onRemoveFile, onError }) {
   const fileInputRef = useRef(null);
   const [isDragging, setIsDragging] = React.useState(false);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
+  const handleFile = (file) => {
+    if (file.type === 'application/pdf') {
       onFileSelect(file);
     } else {
-      alert('Please select a valid PDF file.');
+      onError(`"${file.name}" isn't a PDF. Choose a PDF file to continue.`);
     }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    // Reset so choosing the same file again still fires a change event
+    e.target.value = '';
+    if (file) handleFile(file);
   };
 
   const handleDragOver = (e) => {
@@ -26,47 +33,41 @@ function FileUpload({ selectedFile, fileInfo, onFileSelect, onRemoveFile }) {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      onFileSelect(file);
-    } else {
-      alert('Please drop a valid PDF file.');
-    }
+    if (file) handleFile(file);
   };
 
   return (
     <section className="upload-section">
       {!selectedFile ? (
         <div className="file-input-wrapper">
-          <div
+          <button
+            type="button"
             className={`upload-area ${isDragging ? 'drag-over' : ''}`}
             onClick={() => fileInputRef.current.click()}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <svg className="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-            </svg>
-            <p className="upload-text">
+            <Icon name="cloud_upload" size={48} className="upload-icon" />
+            <span className="upload-text">
               <span className="upload-text-main">Drop PDF here or click to browse</span>
               <span className="upload-text-sub">Supports single or multi-page PDFs</span>
-            </p>
-          </div>
+            </span>
+          </button>
           <input
             ref={fileInputRef}
             type="file"
             accept=".pdf"
+            aria-label="Choose a PDF file"
             onChange={handleFileChange}
             style={{ display: 'none' }}
           />
         </div>
       ) : (
         <div className="file-info">
-          <svg className="file-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
+          <Icon name="description" size={40} className="file-icon" />
           <div className="file-details">
             {fileInfo ? (
               <>
@@ -80,7 +81,9 @@ function FileUpload({ selectedFile, fileInfo, onFileSelect, onRemoveFile }) {
               </>
             )}
           </div>
-          <button className="remove-file" onClick={onRemoveFile} title="Remove file">×</button>
+          <button type="button" className="icon-button" onClick={onRemoveFile} aria-label="Remove file">
+            <Icon name="close" />
+          </button>
         </div>
       )}
     </section>

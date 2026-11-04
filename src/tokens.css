@@ -1,0 +1,106 @@
+/*
+ * ELE Cosmic Design System: Deep Space mode tokens used by this app.
+ * Values match ai-design-system/01_tokens/Deep Space.tokens.json and the live
+ * Figma file (EvMpYWyMSU8kDqGyqd4F1X).
+ *
+ * Naming: names like --md-*, --rh-*, --color-*, --spacing-*, --radius-* and
+ * --overlay-* are the real code syntax configured in Figma. Figma has no code
+ * syntax for the tokens under "local name" comments, or it shares one name
+ * across different tokens. Those are named after the token path for this app
+ * only and are not part of the design system.
+ */
+
+:root {
+  /* Surface */
+  --md-surface-dim: #020408;                   /* surface/neutral/dim */
+  --md-surface: #081f2b;                       /* surface/neutral/base */
+  --md-surface-container: #162d38;             /* surface/neutral/container */
+  --md-surface-container-high: #253c47;        /* surface/neutral/container-high */
+  --rh-alert-subtle: rgba(222, 0, 55, 0.12);   /* surface/brand/alert-subtle */
+
+  /* Text */
+  --md-on-surface: #ffffff;                    /* text/neutral/primary */
+  --md-on-surface-variant: #cbd5e1;            /* text/neutral/secondary */
+  --md-on-surface-disabled: #64748b;           /* text/neutral/disabled */
+
+  /* Interactive */
+  --rh-primary: #cdde00;                       /* interactive/brand/primary */
+  --rh-primary-hover: #a4b200;                 /* interactive/brand/primary-hover */
+  --rh-primary-pressed: #d7e533;               /* interactive/brand/primary-pressed */
+
+  /* Border */
+  --color-border-default: rgba(255, 255, 255, 0.12); /* border/neutral/default */
+  --color-border-strong: rgba(255, 255, 255, 0.24);  /* border/neutral/strong */
+  --color-border-focus: #cdde00;               /* border/brand/focus */
+  --color-border-error: #eb6687;               /* border/brand/error */
+
+  /* Overlay */
+  --overlay-scrim: rgba(15, 23, 42, 0.5);      /* overlay/scrim */
+
+  /* Local names: surface */
+  --surface-neutral-hover: rgba(255, 255, 255, 0.06);
+  --surface-neutral-pressed: rgba(255, 255, 255, 0.1);
+  --surface-glass-standard: rgba(8, 31, 43, 0.4);
+
+  /* Local names: text and icon */
+  --text-brand-primary: #cdde00;
+  --text-brand-on-primary: #081f2b;
+  --icon-neutral-primary: #ffffff;
+  --icon-neutral-secondary: #cbd5e1;
+  --icon-brand-primary: #cdde00;
+
+  /* Local names: border */
+  --border-neutral-hover: rgba(255, 255, 255, 0.32);
+  --border-neutral-pressed: rgba(255, 255, 255, 0.4);
+  --border-brand-primary: rgba(205, 222, 0, 0.3);
+  --border-glass-standard: rgba(255, 255, 255, 0.12);
+
+  /* Local names: feedback */
+  --feedback-error-surface: rgba(222, 0, 55, 0.08);
+  --feedback-error-border: #de0037;
+  --feedback-error-text: #eb6687;
+  --feedback-error-indicator: #eb6687;
+  --feedback-success-surface: rgba(205, 222, 0, 0.08);
+  --feedback-success-border: rgba(205, 222, 0, 0.3);
+  --feedback-success-text: #cdde00;
+  --feedback-success-indicator: #cdde00;
+  --feedback-warning-surface: rgba(222, 84, 0, 0.08);
+  --feedback-warning-border: rgba(222, 84, 0, 0.3);
+  --feedback-warning-text: #e57633;
+  --feedback-warning-indicator: #e57633;
+  --feedback-info-surface: rgba(45, 172, 236, 0.08);
+  --feedback-info-border: rgba(45, 172, 236, 0.3);
+  --feedback-info-text: #2dacec;
+  --feedback-info-indicator: #2dacec;
+
+  /* Primitives: the Progress Bar gradient binds these stops directly */
+  --lime-green-800: #525900;
+  --lime-green-300: #e1eb66;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Deep Space effect styles, as CSS (Figma cannot export these as variables) */
+  --effect-glass-standard: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --effect-glass-hover: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --effect-glass-active-lime: 0 0 40px rgba(205, 222, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4);
+  --effect-button-default: 0 4px 12px rgba(205, 222, 0, 0.25);
+  --effect-button-hover: 0 6px 20px rgba(205, 222, 0, 0.4);
+  --effect-focus-lime: 0 0 0 3px rgba(205, 222, 0, 0.5);
+  --effect-glow-progress-lime: 0 2px 8px rgba(205, 222, 0, 0.4);
+  --effect-modal: 0 24px 64px rgba(0, 0, 0, 0.6);
+
+  --font-family: 'Montserrat', sans-serif;
+}
