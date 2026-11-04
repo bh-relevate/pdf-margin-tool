@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pdf-margin-tool/static/css/main.cf089885.css",
-    "main.js": "/pdf-margin-tool/static/js/main.fa4b22dc.js",
+    "main.js": "/pdf-margin-tool/static/js/main.6745cc41.js",
     "static/js/453.2dae8bb6.chunk.js": "/pdf-margin-tool/static/js/453.2dae8bb6.chunk.js",
     "index.html": "/pdf-margin-tool/index.html",
     "main.cf089885.css.map": "/pdf-margin-tool/static/css/main.cf089885.css.map",
-    "main.fa4b22dc.js.map": "/pdf-margin-tool/static/js/main.fa4b22dc.js.map",
+    "main.6745cc41.js.map": "/pdf-margin-tool/static/js/main.6745cc41.js.map",
     "453.2dae8bb6.chunk.js.map": "/pdf-margin-tool/static/js/453.2dae8bb6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cf089885.css",
-    "static/js/main.fa4b22dc.js"
+    "static/js/main.6745cc41.js"
   ]
 }
