@@ -17,7 +17,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [pdfDoc, setPdfDoc] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
-  const [marginType, setMarginType] = useState('tpp-default');
+  const [marginType, setMarginType] = useState('custom-pixels');
   const [customValue, setCustomValue] = useState('375');
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);

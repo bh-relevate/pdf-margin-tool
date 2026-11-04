@@ -66,6 +66,12 @@ describe('after the guide', () => {
     expect(screen.getByText('Select a PDF to begin')).toBeInTheDocument();
   });
 
+  test('defaults to custom pixels at 375px', () => {
+    render(<App />);
+    expect(screen.getByLabelText('Custom pixels')).toBeChecked();
+    expect(screen.getByLabelText('Margin width')).toHaveValue(375);
+  });
+
   test('shows the version and an orange banner for feedback', () => {
     render(<App />);
     expect(screen.getByText(/PDF Margin Tool v2\.0/)).toBeInTheDocument();
