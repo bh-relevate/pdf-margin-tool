@@ -83,10 +83,12 @@ The PDF Margin Tool automates the process of adding right-side white space to PD
 
 | Use Case | Recommended Setting | Result |
 |----------|-------------------|--------|
-| Standard TPP/SPP Desktop (1440px) | TPP/SPP Default (30%) | ~432px margin |
-| Mobile Screenshots (390px) | TPP/SPP Default (30%) | ~117px margin |
+| Most submissions, desktop or mobile | Custom Pixels (375px) | 375px margin |
+| 70/30 layout required | TPP/SPP Default (30%) | ~432px on a 1440px page, ~117px on a 390px page |
 | Client-Specific Requirements | Custom Pixels | Exact width specified |
 | Proportional Across Sizes | Custom Percentage | Consistent ratio |
+
+**Why 375px?** It's the annotation space Account and Client Services teams have most often requested, based on the design team's experience adding margins by hand.
 
 ---
 

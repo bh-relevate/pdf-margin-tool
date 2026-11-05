@@ -57,13 +57,14 @@ STEP 4: REVIEW & SUBMIT
 
 COMMON SCENARIOS:
 
-Desktop Screenshots (1440px width)
-  → Use: TPP/SPP Default (30%)
-  → Result: ~432px right margin
+Most Submissions (desktop or mobile screenshots)
+  → Use: Custom Pixels (375)
+  → Result: 375px right margin, the space most often requested
+    by Account and Client Services teams
 
-Mobile Screenshots (390px width)
+70/30 Layout Required
   → Use: TPP/SPP Default (30%)
-  → Result: ~117px right margin
+  → Result: ~432px on a 1440px page, ~117px on a 390px page
 
 Client Requests Specific Width
   → Use: Custom Pixels
